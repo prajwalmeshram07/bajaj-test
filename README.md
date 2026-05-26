@@ -8,8 +8,8 @@ Built as part of a Bajaj assessment by **Prajwal Meshram** (0827CS231184).
 
 ## Live Links
 
-- **Frontend (Netlify):** _TBD after deployment_
-- **Backend (Render):** _TBD after deployment_
+- **Frontend (Netlify):** https://deskflow-prajwal.netlify.app
+- **Backend (Render):** https://deskflow-backend.onrender.com _(deploy to get actual URL)_
 
 ---
 
@@ -23,14 +23,14 @@ bajaj-test/
 
 ---
 
-## Backend Setup
+## Backend Setup (Local)
 
 ```bash
 cd backend
 npm install
 ```
 
-Create a `.env` file:
+Create a `.env` file (copy from `.env.example`):
 
 ```
 MONGO_URI=mongodb+srv://<user>:<pass>@cluster0.xxxxx.mongodb.net/deskflow
@@ -45,7 +45,7 @@ node server.js
 
 ---
 
-## Frontend Setup
+## Frontend Setup (Local)
 
 ```bash
 cd frontend
@@ -66,12 +66,38 @@ npm run dev
 
 ---
 
+## Backend Deployment (Render)
+
+1. Go to https://render.com → New → Web Service
+2. Connect this GitHub repo
+3. Set:
+   - **Root Directory:** `backend`
+   - **Build Command:** `npm install`
+   - **Start Command:** `node server.js`
+4. Add environment variables:
+   - `MONGO_URI` = your MongoDB Atlas connection string
+   - `PORT` = `5000`
+5. Copy the deployed URL and set it as `VITE_API_URL` in your Netlify site env vars
+
+---
+
+## Frontend Deployment (Netlify)
+
+Already deployed at: https://deskflow-prajwal.netlify.app
+
+To redeploy after backend URL is confirmed:
+1. Go to Netlify → Site settings → Environment variables
+2. Update `VITE_API_URL` to your Render backend URL
+3. Trigger a new deploy
+
+---
+
 ## API Endpoints
 
 | Method | Route | Description |
 |--------|-------|-------------|
 | POST | /tickets | Create ticket |
-| GET | /tickets | Get all tickets (supports ?status, ?priority, ?breached) |
+| GET | /tickets | List tickets (supports `?status=`, `?priority=`, `?breached=true`) |
 | PATCH | /tickets/:id | Update ticket status |
 | DELETE | /tickets/:id | Delete ticket |
 | GET | /tickets/stats | Get summary stats |
@@ -82,7 +108,7 @@ npm run dev
 
 ```
 open → in_progress → resolved → closed
-(backward transitions also allowed one step at a time)
+(backward one step at a time: closed → resolved → in_progress → open)
 ```
 
 ---
@@ -91,10 +117,10 @@ open → in_progress → resolved → closed
 
 | Priority | Target |
 |----------|--------|
-| urgent | 1 hour |
-| high | 4 hours |
-| medium | 24 hours |
-| low | 72 hours |
+| urgent   | 1 hour |
+| high     | 4 hours |
+| medium   | 24 hours |
+| low      | 72 hours |
 
 ---
 
