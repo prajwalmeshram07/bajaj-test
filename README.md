@@ -9,7 +9,7 @@ Built as part of a Bajaj assessment by **Prajwal Meshram** (0827CS231184).
 ## Live Links
 
 - **Frontend (Netlify):** https://deskflow-prajwal.netlify.app
-- **Backend (Render):** https://deskflow-backend.onrender.com _(deploy to get actual URL)_
+- **Backend API (Netlify Functions):** https://deskflow-backend-api.netlify.app
 
 ---
 
